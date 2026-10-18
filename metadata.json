@@ -1,0 +1,6 @@
+{
+  "name": "Velora Beauty Salon",
+  "description": "Luxury beauty salon offering personalized hair styling, facial skincare, bridal beauty, manicures, and expert care in an elegant sanctuary.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

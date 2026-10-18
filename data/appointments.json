@@ -1,0 +1,14 @@
+[
+  {
+    "id": "VEL-MVDHX8H6-944",
+    "fullName": "Eleanor Vance",
+    "email": "eleanor@example.com",
+    "phone": "555-123-4567",
+    "service": "Hair Styling",
+    "preferredDate": "2026-10-25",
+    "preferredTime": "Morning (9:00 AM – 11:30 AM)",
+    "notes": "Looking forward to an occasion blowout",
+    "createdAt": "2026-10-18T07:20:26.922Z",
+    "status": "Received"
+  }
+]
