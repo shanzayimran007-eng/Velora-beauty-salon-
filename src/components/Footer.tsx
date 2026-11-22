@@ -1,7 +1,7 @@
 import React from 'react';
 import type { PageId } from '../types';
-import { SALON_INFO, SERVICES_LIST } from '../data/salonData';
-import { Sparkles, MapPin, Phone, Mail, Clock, ArrowRight, Instagram, Facebook } from 'lucide-react';
+import { SALON_INFO, SERVICES_LIST, getWhatsAppUrl, getDirectEmailUrl } from '../data/salonData';
+import { Sparkles, MapPin, Phone, Mail, Clock, ArrowRight, Instagram, Facebook, MessageCircle } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageId, serviceId?: string) => void;
@@ -140,6 +140,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Salon Concierge
             </h4>
             <div className="space-y-3 text-xs text-[#FAF6F0]/80">
+              {/* WhatsApp direct */}
+              <div className="flex items-start gap-2.5">
+                <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-medium text-[#FAF6F0]">WhatsApp Concierge:</span>
+                  <a
+                    href={getWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#25D366] hover:underline font-semibold flex items-center gap-1"
+                  >
+                    <span>{SALON_INFO.whatsappDisplay}</span>
+                    <span className="text-[10px] bg-[#25D366]/20 px-1.5 py-0.2 rounded text-emerald-300">Chat</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Address */}
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#C58F91] shrink-0 mt-0.5" />
                 <div>
@@ -147,20 +165,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <span>{SALON_INFO.addressPlaceholder}</span>
                 </div>
               </div>
+
+              {/* Phone */}
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#C58F91] shrink-0" />
                 <div>
                   <span className="block font-medium text-[#FAF6F0]">Direct Line (Placeholder):</span>
-                  <span>{SALON_INFO.phonePlaceholder}</span>
+                  <a href={`tel:${SALON_INFO.phoneClean}`} className="hover:text-[#C58F91] transition-colors">
+                    {SALON_INFO.phonePlaceholder}
+                  </a>
                 </div>
               </div>
+
+              {/* Email */}
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#C58F91] shrink-0" />
                 <div>
                   <span className="block font-medium text-[#FAF6F0]">Concierge Inquiries:</span>
-                  <span>{SALON_INFO.emailPlaceholder}</span>
+                  <a href={getDirectEmailUrl()} className="hover:text-[#C58F91] transition-colors">
+                    {SALON_INFO.emailPlaceholder}
+                  </a>
                 </div>
               </div>
+
+              {/* Hours */}
               <div className="flex items-start gap-2.5 pt-1">
                 <Clock className="w-4 h-4 text-[#C58F91] shrink-0 mt-0.5" />
                 <div>

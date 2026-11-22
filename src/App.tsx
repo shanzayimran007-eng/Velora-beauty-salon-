@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { PageId } from './types';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { QuickContactWidget } from './components/QuickContactWidget';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -69,6 +70,9 @@ export default function App() {
         )}
         {currentPage === 'contact' && <ContactPage onNavigate={navigateTo} />}
       </main>
+
+      {/* Direct Contact Floating Widget (WhatsApp, Email, Call) */}
+      <QuickContactWidget onNavigate={navigateTo} />
 
       {/* Global Footer */}
       <Footer onNavigate={navigateTo} />

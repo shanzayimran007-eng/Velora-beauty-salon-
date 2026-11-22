@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { PageId } from '../types';
-import { SERVICES_LIST } from '../data/salonData';
-import { Calendar, HelpCircle, Clock, Info } from 'lucide-react';
+import { SERVICES_LIST, getWhatsAppUrl, getDirectEmailUrl } from '../data/salonData';
+import { Calendar, HelpCircle, Clock, Info, MessageCircle, Mail } from 'lucide-react';
 
 interface ServicesPageProps {
   onNavigate: (page: PageId, serviceId?: string) => void;
@@ -113,7 +113,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              <div className="p-6 pt-0">
+              <div className="p-6 pt-0 space-y-2">
                 <button
                   onClick={() => onNavigate('booking', service.name)}
                   className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#352722] text-[#FAF6F0] text-xs uppercase tracking-wider font-semibold hover:bg-[#352722]/90 hover:shadow-md transition-all cursor-pointer whitespace-nowrap"
@@ -121,6 +121,15 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
                   <Calendar className="w-3.5 h-3.5 text-[#C58F91]" />
                   Book This Service
                 </button>
+                <a
+                  href={getWhatsAppUrl(`Hello Velora! I'd like to ask a quick question regarding your "${service.name}" service.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl border border-[#25D366]/40 bg-[#25D366]/5 text-[#128C7E] text-[11px] uppercase tracking-wider font-semibold hover:bg-[#25D366] hover:text-white transition-all whitespace-nowrap"
+                >
+                  <MessageCircle className="w-3 h-3" />
+                  Ask on WhatsApp
+                </a>
               </div>
             </div>
           ))}
@@ -137,14 +146,30 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
             Unsure Which Treatment Suits Your Needs?
           </h2>
           <p className="text-sm text-[#352722]/75 max-w-xl mx-auto">
-            Our salon consultants are delighted to answer your questions regarding hair textures, skin sensitivity, or bridal party schedules.
+            Our salon consultants are delighted to answer your questions regarding hair textures, skin sensitivity, or bridal party schedules via WhatsApp, email, or telephone.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={getWhatsAppUrl('Hello Velora Concierge! I have a question about choosing the right service for my hair and skin.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-white text-xs uppercase tracking-widest font-semibold hover:bg-[#20ba59] transition-all shadow-sm"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              Chat on WhatsApp
+            </a>
+            <a
+              href={getDirectEmailUrl('Service Consultation Question')}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#352722] text-[#FAF6F0] text-xs uppercase tracking-widest font-semibold hover:bg-[#352722]/90 transition-all shadow-sm"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#C58F91]" />
+              Direct Email
+            </a>
             <button
               onClick={() => onNavigate('contact')}
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-[#352722]/40 text-[#352722] text-xs uppercase tracking-widest font-semibold hover:bg-[#E8D8C8]/60 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#352722]/40 text-[#352722] text-xs uppercase tracking-widest font-semibold hover:bg-[#E8D8C8]/60 transition-colors cursor-pointer"
             >
-              Have Questions? Contact Us
+              Contact Page
             </button>
           </div>
         </div>

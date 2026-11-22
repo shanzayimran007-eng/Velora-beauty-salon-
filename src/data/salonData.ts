@@ -154,7 +154,11 @@ export const SALON_INFO = {
   name: 'Velora Beauty Salon',
   tagline: 'Reveal Your Natural Beauty.',
   phonePlaceholder: '+1 (555) 234-5678',
+  phoneClean: '+15552345678',
   emailPlaceholder: 'contact@velorasalon.com',
+  whatsappNumber: '15552345678',
+  whatsappDisplay: '+1 (555) 234-5678',
+  whatsappDefaultMessage: 'Hello Velora Salon! I am browsing your website and would like to inquire about booking an appointment or services.',
   addressPlaceholder: '124 Blossom Lane, Suite 200, Metropolis, NY 10001',
   hours: [
     { days: 'Monday – Friday', hours: '9:00 AM – 7:00 PM' },
@@ -167,3 +171,15 @@ export const SALON_INFO = {
     { name: 'Facebook', handle: 'Velora Beauty Salon', url: 'https://facebook.com' },
   ],
 };
+
+export function getWhatsAppUrl(customMessage?: string): string {
+  const msg = customMessage || SALON_INFO.whatsappDefaultMessage;
+  return `https://wa.me/${SALON_INFO.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+}
+
+export function getDirectEmailUrl(subject?: string, body?: string): string {
+  const sub = subject || 'Inquiry from Velora Beauty Salon Website';
+  const bod = body || 'Hello Velora Concierge,\n\nI would like to inquire about...';
+  return `mailto:${SALON_INFO.emailPlaceholder}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(bod)}`;
+}
+

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { PageId } from '../types';
-import { SERVICES_LIST, SALON_INFO } from '../data/salonData';
+import { SERVICES_LIST, SALON_INFO, getWhatsAppUrl, getDirectEmailUrl } from '../data/salonData';
 import {
   Calendar,
   Clock,
@@ -13,6 +13,8 @@ import {
   HelpCircle,
   ArrowRight,
   ShieldCheck,
+  MessageCircle,
+  ExternalLink,
 } from 'lucide-react';
 
 interface BookingPageProps {
@@ -456,10 +458,51 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate, initialSer
 
           {/* Context & Assistance Column */}
           <div className="lg:col-span-4 space-y-6">
+            {/* Instant WhatsApp Booking Card */}
+            <div className="bg-[#FFFFFF] rounded-3xl p-6 sm:p-8 border border-[#E8D8C8] space-y-4 shadow-sm">
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 rounded-2xl bg-[#25D366]/15 flex items-center justify-center text-[#25D366]">
+                  <MessageCircle className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] uppercase tracking-wider font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  Fastest Option
+                </span>
+              </div>
+              <h3 className="font-serif text-2xl font-semibold text-[#352722]">
+                Instant WhatsApp Booking
+              </h3>
+              <p className="text-xs text-[#352722]/75 leading-relaxed">
+                Prefer to chat directly? Skip the form and message our salon concierge directly on WhatsApp for real-time scheduling:
+              </p>
+              <div className="space-y-2 pt-1">
+                <a
+                  href={getWhatsAppUrl(`Hello Velora Salon! I would like to book an appointment for "${service}". Please let me know what dates and times are available.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#20ba59] transition-all shadow-sm"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Chat on WhatsApp Now
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+
+                <a
+                  href={getDirectEmailUrl(
+                    `Appointment Booking Request: ${service}`,
+                    `Hello Velora Concierge,\n\nI would like to request an appointment for: ${service}\n\nName: ${fullName || '[Your Name]'}\nPhone: ${phone || '[Your Phone]'}\nPreferred Date: ${preferredDate || '[Date]'}\nPreferred Time: ${preferredTime}\nNotes: ${notes || 'None'}`
+                  )}
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-[#352722]/30 text-[#352722] text-xs font-semibold uppercase tracking-wider hover:bg-[#FAF6F0] transition-all"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#C58F91]" />
+                  Send Direct Email
+                </a>
+              </div>
+            </div>
+
             {/* Help Card */}
             <div className="bg-[#FAF6F0] rounded-3xl p-6 sm:p-8 border border-[#E8D8C8] space-y-4">
-              <div className="w-10 h-10 rounded-full bg-[#E8D8C8] flex items-center justify-center text-[#C58F91]">
-                <HelpCircle className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-full bg-[#E8D8C8] flex items-center justify-center text-[#352722]">
+                <HelpCircle className="w-5 h-5 text-[#C58F91]" />
               </div>
               <h3 className="font-serif text-2xl font-semibold text-[#352722]">
                 Need Help Choosing a Service?

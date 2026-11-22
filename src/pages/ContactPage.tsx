@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { PageId } from '../types';
-import { SALON_INFO } from '../data/salonData';
+import { SALON_INFO, getWhatsAppUrl, getDirectEmailUrl } from '../data/salonData';
 import {
   Mail,
   Phone,
@@ -15,6 +15,8 @@ import {
   Instagram,
   Facebook,
   Share2,
+  MessageCircle,
+  ExternalLink,
 } from 'lucide-react';
 
 interface ContactPageProps {
@@ -132,6 +134,111 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      {/* Direct Buyer-to-Seller Instant Contact Cards */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* WhatsApp Card */}
+          <div className="bg-[#FFFFFF] p-6 rounded-3xl border border-[#E8D8C8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-2xl bg-[#25D366]/15 text-[#128C7E] flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-[#25D366]" />
+                </div>
+                <span className="text-[10px] uppercase tracking-wider font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full border border-emerald-200">
+                  Instant Response
+                </span>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl font-semibold text-[#352722]">
+                  WhatsApp Direct Chat
+                </h3>
+                <p className="text-xs text-[#352722]/70 mt-1 leading-relaxed">
+                  Connect immediately with our salon manager for appointment queries, photos, or pricing.
+                </p>
+                <p className="text-xs font-semibold text-[#352722] mt-2">
+                  {SALON_INFO.whatsappDisplay}
+                </p>
+              </div>
+            </div>
+            <a
+              href={getWhatsAppUrl('Hello Velora Salon! I have a question about booking an appointment.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#20ba59] transition-all shadow-sm"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Chat on WhatsApp
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Direct Email Card */}
+          <div className="bg-[#FFFFFF] p-6 rounded-3xl border border-[#E8D8C8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-2xl bg-[#E8D8C8]/50 text-[#352722] flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-[#C58F91]" />
+                </div>
+                <span className="text-[10px] uppercase tracking-wider font-semibold bg-[#FAF6F0] text-[#352722]/70 px-2.5 py-1 rounded-full border border-[#E8D8C8]">
+                  Within 24 Hours
+                </span>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl font-semibold text-[#352722]">
+                  Direct Email Desk
+                </h3>
+                <p className="text-xs text-[#352722]/70 mt-1 leading-relaxed">
+                  Send your requirements directly to our concierge mailbox with one click.
+                </p>
+                <p className="text-xs font-semibold text-[#352722] mt-2">
+                  {SALON_INFO.emailPlaceholder}
+                </p>
+              </div>
+            </div>
+            <a
+              href={getDirectEmailUrl()}
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#352722] text-[#FAF6F0] text-xs font-semibold uppercase tracking-wider hover:bg-[#352722]/90 transition-all shadow-sm"
+            >
+              <Mail className="w-4 h-4 text-[#C58F91]" />
+              Send Direct Email
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Direct Call Card */}
+          <div className="bg-[#FFFFFF] p-6 rounded-3xl border border-[#E8D8C8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-2xl bg-[#E8D8C8]/50 text-[#352722] flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-[#C58F91]" />
+                </div>
+                <span className="text-[10px] uppercase tracking-wider font-semibold bg-[#FAF6F0] text-[#352722]/70 px-2.5 py-1 rounded-full border border-[#E8D8C8]">
+                  During Salon Hours
+                </span>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl font-semibold text-[#352722]">
+                  Phone Concierge
+                </h3>
+                <p className="text-xs text-[#352722]/70 mt-1 leading-relaxed">
+                  Call our front desk for immediate scheduling, questions, or directions.
+                </p>
+                <p className="text-xs font-semibold text-[#352722] mt-2">
+                  {SALON_INFO.phonePlaceholder}
+                </p>
+              </div>
+            </div>
+            <a
+              href={`tel:${SALON_INFO.phoneClean}`}
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-[#352722]/30 text-[#352722] text-xs font-semibold uppercase tracking-wider hover:bg-[#E8D8C8]/50 transition-all"
+            >
+              <Phone className="w-4 h-4 text-[#C58F91]" />
+              Call Front Desk
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Main Grid: Info & Form */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -143,6 +250,34 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </h2>
 
               <div className="space-y-5 text-sm text-[#352722]/85">
+                {/* WhatsApp */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] shrink-0">
+                    <MessageCircle className="w-5 h-5" />
+                  </div>
+                  <div className="w-full">
+                    <span className="block text-xs uppercase tracking-wider text-[#352722]/50 font-semibold">
+                      WhatsApp Concierge
+                    </span>
+                    <div className="flex items-center justify-between gap-2 mt-0.5">
+                      <span className="font-medium text-[#352722]">
+                        {SALON_INFO.whatsappDisplay}
+                      </span>
+                      <a
+                        href={getWhatsAppUrl()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-semibold text-[#128C7E] hover:underline"
+                      >
+                        Chat Now →
+                      </a>
+                    </div>
+                    <span className="text-[11px] text-[#352722]/50 block">
+                      Direct WhatsApp for instant booking queries
+                    </span>
+                  </div>
+                </div>
+
                 {/* Phone */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#FAF6F0] border border-[#E8D8C8] flex items-center justify-center text-[#C58F91] shrink-0">
@@ -166,14 +301,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div className="w-10 h-10 rounded-xl bg-[#FAF6F0] border border-[#E8D8C8] flex items-center justify-center text-[#C58F91] shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="w-full">
                     <span className="block text-xs uppercase tracking-wider text-[#352722]/50 font-semibold">
                       Email Inquiries (Placeholder)
                     </span>
-                    <span className="font-medium text-[#352722] block mt-0.5">
-                      {SALON_INFO.emailPlaceholder}
-                    </span>
-                    <span className="text-[11px] text-[#352722]/50">
+                    <div className="flex items-center justify-between gap-2 mt-0.5">
+                      <span className="font-medium text-[#352722]">
+                        {SALON_INFO.emailPlaceholder}
+                      </span>
+                      <a
+                        href={getDirectEmailUrl()}
+                        className="text-xs font-semibold text-[#352722] hover:text-[#C58F91] underline"
+                      >
+                        Email Us →
+                      </a>
+                    </div>
+                    <span className="text-[11px] text-[#352722]/50 block">
                       Editable concierge mailbox
                     </span>
                   </div>

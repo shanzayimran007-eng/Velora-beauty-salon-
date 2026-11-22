@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { PageId } from '../types';
-import { Menu, X, Sparkles, Calendar } from 'lucide-react';
+import { Menu, X, Sparkles, Calendar, MessageCircle, Mail } from 'lucide-react';
+import { getWhatsAppUrl, getDirectEmailUrl } from '../data/salonData';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -72,7 +73,19 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           </nav>
 
           {/* Zone 3: Primary Action & Mobile Hamburger */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            {/* Direct WhatsApp Quick Contact Button */}
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#25D366]/10 text-[#128C7E] hover:bg-[#25D366] hover:text-white border border-[#25D366]/30 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap"
+              aria-label="Direct WhatsApp Chat with Velora Concierge"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </a>
+
             <button
               onClick={() => handleNavClick('booking')}
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#352722] text-[#FAF6F0] text-xs uppercase tracking-wider font-semibold hover:bg-[#352722]/90 hover:shadow-md transition-all cursor-pointer whitespace-nowrap"
@@ -116,7 +129,26 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               );
             })}
 
-            <div className="pt-4 mt-2 border-t border-[#E8D8C8]">
+            {/* Direct Contact Options on Mobile */}
+            <div className="pt-4 mt-2 border-t border-[#E8D8C8] space-y-2">
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#25D366] text-white text-sm uppercase tracking-wider font-semibold hover:bg-[#20ba59] transition-all shadow-sm"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Direct WhatsApp Chat
+              </a>
+
+              <a
+                href={getDirectEmailUrl()}
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full border border-[#352722]/30 text-[#352722] text-xs uppercase tracking-wider font-semibold hover:bg-[#E8D8C8]/40 transition-all"
+              >
+                <Mail className="w-4 h-4 text-[#C58F91]" />
+                Direct Email Concierge
+              </a>
+
               <button
                 onClick={() => handleNavClick('booking')}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#352722] text-[#FAF6F0] text-sm uppercase tracking-wider font-semibold hover:bg-[#352722]/90 transition-all cursor-pointer"
